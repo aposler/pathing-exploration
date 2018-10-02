@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>My test page</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  <script src="scripts/main.js"></script>
+</head>
+
+<body>
+  <h1>Interactive Page</h1>
+  <p>Enter the side-length of the grid. Number must be between 2 and 50, inclusive. Hit the redraw button to reset the grid
+    to its last size. Click and drag to mark walls, or remove walls. Hit Solve to find the least cost path from the top left
+    to the bottom right. The solution is derived using the
+    <a href="https://en.wikipedia.org/wiki/A*_search_algorithm ">A* algorithm</a>
+    and avoids any user created barriers.</p>
+  <p id="inputDescr">Enter one number, it will be used as both Length and Width</p>
+  <input type="text" name="dimensions" id="dimensions" placeholder="dimensions">
+  <button type="button" id="enterDimen">Enter Dimensions</button><br>
+  <input type="text" name="username" id="username" placeholder="username">
+  <button type="button" id="enterUser">Enter Username</button><br>
+  <select id="nameBox">
+    <option value="" disabled selected hidden>Please Enter Username to Populate</option>
+  </select>
+  <button type="button" id="save">Save Grid</button>
+  <button type="button" id="load">Load Grid</button><br>
+  <button type="button" id="restart">Redraw</button>
+  <br>
+  <button type="button" id="solve" style="margin: 0 0 0 10px">Solve</button>
+  <p id="errorText">Message Text: </p>
+  <div class="square">
+    <div class="content">
+      <canvas id="aStarCanvas" class="grid-item"></canvas>
+    </div>
+  </div>
+  <div class="square">
+    <div class="content">
+      <canvas id="breadthCanvas" class="grid-item"></canvas>
+    </div>
+  </div>
+  <div class="square">
+    <div class="content">
+      <canvas id="depthCanvas" class="grid-item"></canvas>
+    </div>
+  </div>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
