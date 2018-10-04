@@ -85,31 +85,46 @@ function findMapKey(callback, username) {
 //Adds a date/time pair to data, then calls buildSendHtml and sends the results back
 function addGrid(res, newData) {
   findMapKey(function (newKey) {
-    var sqlGrid = JSON.stringify(newData.grid);
-    var gridName = newData.gridName;
-    if(gridName === "" || !gridName){
-      gridName = "grid " + newKey;
-    }
-    db.run("INSERT INTO grids VALUES (" + newKey + ", '" + gridName + "', '" + newData.username +
-      "', '" + sqlGrid + "')", function () {
-        var htmlBody = buildSendHtml(res);
-      }, function () {
-        returnNames(res, newData);
+    db.all("SELECT grid FROM grids WHERE username = '" + newData.username +
+      "' AND gridName = '" + newData.gridName + "'", function (err, rows) {
+        if (rows.length > 0) {
+          var sendStruct = {
+            "valid": false,
+            "names": []
+          };
+          res.writeHead(200, { 'Content-type': 'application/json' });
+          res.end(JSON.stringify(sendStruct));
+          return;
+        }
+        var sqlGrid = JSON.stringify(newData.grid);
+        var gridName = newData.gridName;
+        if (gridName === "" || !gridName) {
+          gridName = "grid " + newKey;
+        }
+        console.log(gridName);
+        db.run("INSERT INTO grids VALUES (" + newKey + ", '" + gridName + "', '" + newData.username +
+          "', '" + sqlGrid + "')", function () { }, function () {
+            returnNames(res, newData);
+          });
       });
   }, newData.username)
 }
 
-function returnGrid(res, newData){
+function returnGrid(res, newData) {
   db.all("SELECT grid FROM grids WHERE username = '" + newData.username +
-  "' AND gridName = '" + newData.gridName + "'", function (err, rows) {
-    res.writeHead(200, { 'Content-type': 'application/json' });
-    res.end(JSON.stringify(rows[0]));
-  });
+    "' AND gridName = '" + newData.gridName + "'", function (err, rows) {
+      res.writeHead(200, { 'Content-type': 'application/json' });
+      res.end(JSON.stringify(rows[0]));
+    });
 }
 
-function returnNames(res, newData){
+function returnNames(res, newData) {
   db.all("SELECT gridName FROM grids WHERE username = '" + newData.username + "'", function (err, rows) {
+    var sendStruct = {
+      "valid": true,
+      "names": rows
+    };
     res.writeHead(200, { 'Content-type': 'application/json' });
-    res.end(JSON.stringify(rows));
+    res.end(JSON.stringify(sendStruct));
   });
 }
