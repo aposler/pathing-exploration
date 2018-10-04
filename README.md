@@ -31,19 +31,35 @@ I created, linked [here](https://github.com/aposler/JavaScript_Project)
 - **Design Achievement 1**: I went through multiple revsions for the user interface.
 All comments were from close family, and the first 2 revisions were done on the previously mentioned project.
 Revision 1)
+
 A)Initially you could only mark obstructions by clicking, and dragging was suggested
+
 B)changing the clarifying text to be clear about how to enter the grid size (used to be entered through a text box)
+
 C)There used to be a message that would pop up if the path failed, and it would shift the page
+
 D)Add a small animation to the solution to make it more appealing
+
 Revision 2)
+
 A)Make the path grow from start to end (it used to go from end to start in the final animation)
+
 B):Dropped Suggestion: Allow the user to work in custom shapes
+
 --Note on B, it was dropped because I felt that distracted a bit from the purpose of the project
+
 C)Add a visual indicator when the path fails
+
 --Note on C, that was when the red grid was added
+
 Revision 3)
+
 A)Change the colors from brown to something more appealing
+
 B)Change the text box for dimensions to a slider
+
 C)Add some way to save the grid
+
 D)Allows the user to speed up the completed path (it was kinda slow at 50x50)
+
 E)Add a "stop solving" button
