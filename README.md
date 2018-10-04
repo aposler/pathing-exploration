@@ -1,67 +1,49 @@
 Assignment 4 - Real Web Apps: Designing for an Area of Life  
 ===
+## Alex Osler | Data Visualization | Pathing Algirhtm Exploration
+This was all done by Alex Osler
 
-This assignment is intended to provide a semi-structured setting in which teams or individuals can exercise and hone their web development skills, while obtaining deeper experience in a predefined area.
+The project is allow the user to explore 4 different pathing algorithms,
+A*, Breadth First, Depth First, and Greedy Best First. Each is simply
+performed on a 2d plane, and the user able to create obstacles in the 
+way of each algorithm by dragging on the HTML canvas. The user can see
+all nodes explored by each algorithm, and can control the speed of them,
+including pausing and stepping through the algorithm. The grid also has a
+customizable size, between 2 and 50. Finally, the created grid can be saved
+to a sqlite database, with a custom grid and username. If a user wants to load
+the grid they can see all grids tied to a given username by entering the username,
+and they can then load any of the grids.
 
-The baseline aims of this assignment involve creating an application that demonstrates significant portions of all concepts covered in prior assignments, such as persistence, events, servers, etcetera.
-The educational focus of this assignment is on developing a deeper skillset in a predefined area, for example social media applications.
-
-You may use code from prior assignments.
-However, you must indicate that you have done so clearly on your Readme, including links to any prior repos referenced.
-Also, you may not *re-use* any tech or design achievements; these should always be new.
-
-Baseline Requirements
----
-
-In this assignment, your baseline requirement is to have a fully functional, deployed and web accessible application.
-This application must include:
-
-- Persistence using a database
-- Event-based interaction on the front-end
-- HTML CSS and JS as needed
-- A well-organized server, if not using serverless architectures
-
-Main Requirements
----
-
-Given the sparse baseline requirements, most of your time should be focused on developing an application that operates within one of the A4 project areas:
-
-- Security: Create an application that provides some form of a robust user experience while maintaining the highest possible security standards. Apps in the real world that meet this requirement include Signal, or Keybase.
-- Games: Design and implement an interesting game mechanic as part of a fully functional web application. Recreations of classic games and well-known game mechanics will not recieve many points- focus instead on exploring an original idea.
-- Social Media: Design and Prototype a new form of social media. In theory, conversations online could be as diverse in structure and form as they are in real life. In practice, social media platforms often restrict multiple types of conversations to the same form (comments, likes, tweets, etcetera). Groups in this area should explore new ways to have forms of conversation online.
-- Commerce: There are many existing libraries for payments and store management. Groups in this area might create a store for a particular type of item or service. (Don't create a store for any goods or services that will get your professor- and you- in trouble. You can always re-use the code later.)
-- Data: Data is becoming more pervasive in our daily lives. Groups in this area might create an "Interactive Explanation", explore data-driven journalism, create scientific visualizations for some area of research, and more.
-
-**Above all else** -> Remember that you have limited time, energy, and attention to complete this project within the alloted time. I recommend that you consider spending substantial time on planning activities, and explore alternative ideas that may best fit these constraints.
-
-(Protip: Here's how I would start this project- I would create a list of application ideas that fit some of the bins above, then meet with my team to discss everyone's lists, then decide on which idea we can implement in the alloted time, then make a gameplan on how to get it done. I would also plan out the possible tech and design achievements ahead of time, to avoid fully committing to high-risk ideas that may not pan out.)
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Fork the starting project repo.
-2. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page, it displays correctly.
-4. Deploy your project to Heroku or equivalent hosting platform.
-5. **Ensure that your project has the proper naming scheme `a4-yourGitHubName` or `a4-yourTeamName` so we can find it.**
-6. Modify the Readme to the specifications below.
-7. Create and submit a Pull Request to the original repo.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Team Name | YOUR TEAM'S AREA | Web Application Title
-`insert team names here`
-
-Include a brief summary of your project here.
-Images are encouraged, along with concise, high-level text.
+This is not strictly data visualization, but it was cleared by Professor Harrison first.
+Some of this code (mainly the A* implementation) was taken from a previous project
+I created, linked [here](https://github.com/aposler/JavaScript_Project)
 
 ## Technical Achievements
-- **Tech Achievement 1**: Using a combination of...
-- **Tech Achievement 2**: ...
+- **Tech Achievement 1**: Implementing A*
+- **Tech Achievement 2**: Implementing Depth First 
+- **Tech Achievement 3**: Implementing Breadth First
+- **Tech Achievement 4**: Implementing Greedy Best First
+- **Tech Achievement 5**: Complex Interactions with the Canvas
+- **Tech Achievement 6**: Allowing the user to step through the algorithms
+- **Tech Achievement 7**: Saving and loading grids from a database
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: Shown in `style.css`, the code...
-- **Design Achievement 2**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: I went through multiple revsions for the user interface.
+All comments were from close family, and the first 2 revisions were done on the previously mentioned project.
+Revision 1)
+A)Initially you could only mark obstructions by clicking, and dragging was suggested
+B)changing the clarifying text to be clear about how to enter the grid size (used to be entered through a text box)
+C)There used to be a message that would pop up if the path failed, and it would shift the page
+D)Add a small animation to the solution to make it more appealing
+Revision 2)
+A)Make the path grow from start to end (it used to go from end to start in the final animation)
+B):Dropped Suggestion: Allow the user to work in custom shapes
+--Note on B, it was dropped because I felt that distracted a bit from the purpose of the project
+C)Add a visual indicator when the path fails
+--Note on C, that was when the red grid was added
+Revision 3)
+A)Change the colors from brown to something more appealing
+B)Change the text box for dimensions to a slider
+C)Add some way to save the grid
+D)Allows the user to speed up the completed path (it was kinda slow at 50x50)
+E)Add a "stop solving" button

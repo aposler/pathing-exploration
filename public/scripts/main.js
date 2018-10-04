@@ -241,6 +241,10 @@ function gridInit(dimensions) {
 
     //Reinitializes the grid upon pressing the "Clear" button.
     document.getElementById("restart").onclick = function (event) {
+        if (solving) {
+            alert("You must stop the solve first");
+            return;
+        }
         gridInit(dimensions);
     }
 
@@ -360,6 +364,10 @@ function gridInit(dimensions) {
     //Requests the grid signified by the username and grid name from the server, and replaces
     //the current grid with itt
     var loadGrid = document.getElementById("load");
+    if (solving) {
+        alert("You must stop the solve first");
+        return;
+    }
     loadGrid.onclick = function (event) {
         var username = document.getElementById("username");
         if (username.value === "") {
@@ -418,16 +426,20 @@ function gridInit(dimensions) {
     var continueBtn = document.getElementById("continue");
     continueBtn.onclick = function () {
         pause = false;
-        continuePath(blockSize, offSet, canvases.aStar.aStarPath, canvases.breadth.breadthPath,
-            canvases.depth.depthPath, canvases.greedy.greedyPath);
+        if (solving) {
+            continuePath(blockSize, offSet, canvases.aStar.aStarPath, canvases.breadth.breadthPath,
+                canvases.depth.depthPath, canvases.greedy.greedyPath);
+        }
     }
 
     //Steps the algorithm forward one iteration
     var stepBtn = document.getElementById("step");
     stepBtn.onclick = function () {
         pause = true;
-        continuePath(blockSize, offSet, canvases.aStar.aStarPath, canvases.breadth.breadthPath,
-            canvases.depth.depthPath, canvases.greedy.greedyPath);
+        if (solving) {
+            continuePath(blockSize, offSet, canvases.aStar.aStarPath, canvases.breadth.breadthPath,
+                canvases.depth.depthPath, canvases.greedy.greedyPath);
+        }
     }
 
     //Tells whether all the grids are solves
@@ -438,6 +450,26 @@ function gridInit(dimensions) {
             }
         }
         return true;
+    }
+
+    //Stops the solve
+    var stopBtn = document.getElementById("stop");
+    stopBtn.onclick = function () {
+        var oldPause = pause;
+        pause = true;
+        if (solving) {
+            setTimeout(stopSolve, delay, oldPause);
+        }
+    }
+
+    function stopSolve(oldPause) {
+        for (var i = 0; i < curCanvases.length; ++i) {
+            var canvas = curCanvases[i];
+            canvas.solved = false;
+            reInitGrid(canvas.backArray, dimensions, blockSize, offSet, canvas.ctx);
+        }
+        solving = false;
+        pause = oldPause;
     }
 }
 
@@ -462,14 +494,14 @@ function stripBackArray(backArray) {
 function reInitGrid(grid, dimensions, blockSize, offSet, ctx) {
     for (var i = 0; i < dimensions; i++) {
         for (var j = 0; j < dimensions; j++) {
-            if (grid[i][j] === 2 || grid[i][j] === 0) {
-                grid[i][j] = 0;
-                ctx.fillStyle = "white";
+            if (grid[i][j] === 1) {
+                ctx.fillStyle = "brown";
                 ctx.strokeStyle = "blue";
                 ctx.fillRect((i * blockSize) + offSet, (j * blockSize) + offSet, blockSize, blockSize);
                 ctx.strokeRect((i * blockSize) + offSet, (j * blockSize) + offSet, blockSize, blockSize);
             } else {
-                ctx.fillStyle = "brown";
+                grid[i][j] = 0;
+                ctx.fillStyle = "white";
                 ctx.strokeStyle = "blue";
                 ctx.fillRect((i * blockSize) + offSet, (j * blockSize) + offSet, blockSize, blockSize);
                 ctx.strokeRect((i * blockSize) + offSet, (j * blockSize) + offSet, blockSize, blockSize);
@@ -1073,7 +1105,7 @@ function drawPath(node, blockSize, offSet, ctx) {
     if (node !== null) {
         ctx.fillRect((node.x * blockSize) + offSet, (node.y * blockSize) + offSet, blockSize, blockSize);
         ctx.strokeRect((node.x * blockSize) + offSet, (node.y * blockSize) + offSet, blockSize, blockSize);
-        setTimeout(drawPath, 25, node.parent, blockSize, offSet, ctx);
+        setTimeout(drawPath, delay, node.parent, blockSize, offSet, ctx);
     }
 }
 

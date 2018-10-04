@@ -101,7 +101,6 @@ function addGrid(res, newData) {
         if (gridName === "" || !gridName) {
           gridName = "grid " + newKey;
         }
-        console.log(gridName);
         db.run("INSERT INTO grids VALUES (" + newKey + ", '" + gridName + "', '" + newData.username +
           "', '" + sqlGrid + "')", function () { }, function () {
             returnNames(res, newData);
