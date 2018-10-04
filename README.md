@@ -3,6 +3,8 @@ Assignment 4 - Real Web Apps: Designing for an Area of Life
 ## Alex Osler | Data Visualization | Pathing Algirhtm Exploration
 This was all done by Alex Osler
 
+Project is here https://a4-aposler.herokuapp.com/
+
 The project is allow the user to explore 4 different pathing algorithms,
 A*, Breadth First, Depth First, and Greedy Best First. Each is simply
 performed on a 2d plane, and the user able to create obstacles in the 
